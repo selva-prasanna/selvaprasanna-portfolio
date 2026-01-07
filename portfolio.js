@@ -68,27 +68,26 @@ slide();
 setInterval(slide, 2000);
 
 // ?email.js
-
-document.getElementById('contact-form').addEventListener('submit', (e) => {
+document.getElementById("contact-form").addEventListener("submit", function (e) {
     e.preventDefault();
-    
+  
     let params = {
-        from_name: document.getElementById('full_name').value,
-        email_id: document.getElementById('email_id').value,
-        phn_num: document.getElementById('phn_num').value,
-        message: document.getElementById('message').value
+      from_name: document.getElementById("full_name").value,
+      reply_to: document.getElementById("email_id").value,  // user's email
+      phone: document.getElementById("phn_num").value,
+      message: document.getElementById("message").value,
     };
-
-    emailjs.send("service_di6q7gd", "template_2vy69ig", params)
-        .then(() => {
-            alert('Your message has been sent successfully!');
-            document.getElementById('full_name').value = "";
-            document.getElementById('email_id').value = "";
-            document.getElementById('phn_num').value = "";
-            document.getElementById('message').value = "";
-        })
-        .catch((error) => {
-            console.error('FAILED...', error);
-            alert('There was an error sending your message. Please try again later.');
-        });
-});
+  
+    emailjs
+      .send("service_di6q7gd", "template_2vy69ig", params)
+      .then(function () {
+        alert("Your message has been sent successfully!");
+  
+        document.getElementById("contact-form").reset();
+      })
+      .catch(function (error) {
+        console.log("FAILED...", error);
+        alert("There was an error sending your message.");
+      });
+  });
+  
